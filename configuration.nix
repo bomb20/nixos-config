@@ -50,11 +50,21 @@
     usbutils hplipWithPlugin i3status xorg.xmodmap darcs ghc vimPlugins.ghc-mod-vim jetbrains.idea-community 
     jetbrains.pycharm-community openjdk lxappearance numix-gtk-theme arc-icon-theme gnome3.nautilus torbrowser 
     ubuntu_font_family dmenu
-mutt vdirsyncer khal khard
+mutt vdirsyncer khal khard lynx
   ];
 
   
-  programs.zsh.enable = true;
+  programs = {
+    zsh = {
+      enable = true;
+      ohMyZsh = {
+        enable = true;
+        theme = "gentoo";
+      };
+    };
+    ssh.startAgent = true;
+  };
+
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.enableKVM = true;
   
@@ -112,7 +122,7 @@ mutt vdirsyncer khal khard
       "home" = {
         subvolume = "/home";
         extraConfig = ''
-          ALLOW_USERS="vincenet"
+          ALLOW_USERS="vincent"
         '';
        };
     };
