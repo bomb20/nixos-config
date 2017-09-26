@@ -107,6 +107,16 @@ mutt vdirsyncer khal khard
     enable = true;
   };
 
+  services.snapper = {
+    configs = {
+      "home" = {
+        subvolume = "/home";
+        extraConfig = ''
+          ALLOW_USERS="vincenet"
+        '';
+       };
+    };
+  };
   # TOR stuff
 #  services.tor = {
 #    enable = true;
