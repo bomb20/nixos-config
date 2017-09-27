@@ -11,8 +11,17 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+#  boot.loader.systemd-boot.enable = true;
+#  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot = {
+    kernelModules = [ "acpi_call" ];
+    kernelPackages = pkgs.linuxPackages_hardened;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
 
   networking.hostName = "hell"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -48,9 +57,9 @@
     gcc gnumake cmake maven subversion sshfs-fuse xournal gimp gnome3.eog i3lock redshift calibre cmus liferea tdesktop pv 
     owncloud-client netbeans texmaker pass python3 octave shotwell xsane xinput_calibrator htop arp-scan 
     usbutils hplipWithPlugin i3status xorg.xmodmap darcs ghc vimPlugins.ghc-mod-vim jetbrains.idea-community 
-    jetbrains.pycharm-community openjdk lxappearance numix-gtk-theme arc-icon-theme gnome3.nautilus torbrowser 
+    jetbrains.pycharm-community openjdk lxappearance numix-gtk-theme arc-icon-theme gnome3.nautilus tor-browser-bundle-bin 
     ubuntu_font_family dmenu
-mutt vdirsyncer khal khard lynx
+mutt vdirsyncer khal khard lynx keychain redshift syncthing 
   ];
 
   
@@ -63,6 +72,7 @@ mutt vdirsyncer khal khard lynx
       };
     };
     ssh.startAgent = true;
+    vim.defaultEditor = true;
   };
 
   virtualisation.libvirtd.enable = true;
@@ -115,14 +125,20 @@ mutt vdirsyncer khal khard lynx
 
   services.tlp = {
     enable = true;
+    extraConfig = ''
+      START_CHARGE_THRESH_BAT0=75
+      STOP_CHARGE_THRESH_BAT0=80
+    '';
   };
 
   services.snapper = {
     configs = {
-      "home" = {
+      home = {
         subvolume = "/home";
         extraConfig = ''
           ALLOW_USERS="vincent"
+          TIMELINE_CREATE="yes"
+          TIMELINE_CLEANUP="yes"
         '';
        };
     };
@@ -132,7 +148,6 @@ mutt vdirsyncer khal khard lynx
 #    enable = true;
 #    client.enable = true;
 #  };
-
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.vincent = {
