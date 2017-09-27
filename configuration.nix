@@ -10,9 +10,7 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-#  boot.loader.systemd-boot.enable = true;
-#  boot.loader.efi.canTouchEfiVariables = true;
+# Boot-related options
 
   boot = {
     kernelModules = [ "acpi_call" ];
@@ -23,46 +21,34 @@
     };
   };
 
+# network related optons
+
   networking.hostName = "hell"; # Define your hostname.
   networking.networkmanager.enable = true;
 
-  # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  #
-  #
-
+#Package configuration
 
   nixpkgs.config = {
     allowUnfree = true;
-#    packageOverrides = pkgs: {
-#      jre = pkgs.oraclejre8;
-#      jdk = pkgs.oraclejdk8;
-#    };
   };
 
-  services.cron.enable = true;
 #  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     wget vim terminator rsync git networkmanagerapplet firefox borgbackup sudo zathura vlc gnupg zim hexchat
     gcc gnumake cmake maven subversion sshfs-fuse xournal gimp gnome3.eog i3lock redshift calibre cmus liferea tdesktop pv 
-    owncloud-client netbeans texmaker pass python3 octave shotwell xsane xinput_calibrator htop arp-scan 
+    nextcloud-client netbeans texmaker pass python3 octave shotwell xsane xinput_calibrator htop arp-scan 
     usbutils hplipWithPlugin i3status xorg.xmodmap darcs ghc vimPlugins.ghc-mod-vim jetbrains.idea-community 
     jetbrains.pycharm-community openjdk lxappearance numix-gtk-theme arc-icon-theme gnome3.nautilus tor-browser-bundle-bin 
     ubuntu_font_family dmenu
-mutt vdirsyncer khal khard lynx keychain redshift syncthing 
+mutt vdirsyncer khal khard lynx keychain redshift syncthing libreoffice
   ];
 
   
+# Progran specific options
   programs = {
     zsh = {
       enable = true;
@@ -87,11 +73,14 @@ mutt vdirsyncer khal khard lynx keychain redshift syncthing
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+### Service related things
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
   hardware.sane.enable = true;
 
 
+  services.cron.enable = true;
   services.udev.extraRules = ''
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE:="0666"
   '';
@@ -122,6 +111,7 @@ mutt vdirsyncer khal khard lynx keychain redshift syncthing
 
   hardware.pulseaudio.enable = true;
 #  services.gnome3.gnome-keyring.enable = true;
+
 
   services.tlp = {
     enable = true;
