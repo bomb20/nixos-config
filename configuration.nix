@@ -40,7 +40,7 @@
   environment.systemPackages = with pkgs; [
     wget vim terminator rsync git networkmanagerapplet firefox borgbackup sudo zathura vlc gnupg zim hexchat
     gcc gnumake cmake maven subversion sshfs-fuse xournal gimp gnome3.eog i3lock redshift calibre cmus liferea tdesktop pv 
-    nextcloud-client netbeans texmaker pass python3 octave shotwell xsane xinput_calibrator htop arp-scan 
+    nextcloud-client texmaker pass python3 octave shotwell xsane xinput_calibrator htop arp-scan 
     usbutils hplipWithPlugin i3status xorg.xmodmap darcs ghc vimPlugins.ghc-mod-vim jetbrains.idea-community 
     jetbrains.pycharm-community openjdk lxappearance numix-gtk-theme arc-icon-theme gnome3.nautilus tor-browser-bundle-bin 
     ubuntu_font_family dmenu
