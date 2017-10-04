@@ -5,11 +5,6 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ 
-      ./device-config.nix
-      ./hardware-configuration.nix
-    ];
 
 # network related optons
 
