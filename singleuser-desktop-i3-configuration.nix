@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./device-config.nix
+      ./hardware-configuration.nix
     ];
 
 # Boot-related options

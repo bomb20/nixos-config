@@ -1,3 +1,4 @@
 device-config.nix
 result
 configuration.nix
+hardware-configuration.nix
