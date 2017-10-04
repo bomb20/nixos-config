@@ -6,13 +6,10 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       ./device-config.nix
       ./hardware-configuration.nix
     ];
-
-# Boot-related options
-
 
 # network related optons
 
@@ -20,11 +17,8 @@
 
 #Package configuration
 
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
+  nixpkgs.config.allowUnfree = true;
 
-#  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     wget vim terminator rsync git networkmanagerapplet firefox borgbackup sudo zathura vlc gnupg zim hexchat
     gcc gnumake cmake maven subversion sshfs-fuse xournal gimp gnome3.eog i3lock redshift calibre cmus liferea tdesktop pv 
@@ -49,16 +43,11 @@
     vim.defaultEditor = true;
   };
 
-### Service related things
-
-  # Enable CUPS to print documents.
+### Hardware related settings
   hardware.sane.enable = true;
-
-  # just X11 things...
-
   hardware.pulseaudio.enable = true;
-#  services.gnome3.gnome-keyring.enable = true;
 
+### Service related settings
   services = {
     cron.enable = true;
     udev.extraRules = ''
@@ -88,7 +77,7 @@
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+## User settings
   users.extraUsers.vincent = {
     isNormalUser = true;
     uid = 1000;
