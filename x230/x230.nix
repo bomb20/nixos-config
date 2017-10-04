@@ -4,7 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./x230-hardware-configuration.nix
-      ./snapper.nix
+      ../misc/snapper.nix
     ];
 
 # Boot-related options
